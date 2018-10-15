@@ -12,10 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Modifications copyright (C) 2018 Sharedcloud
+// Details: In the "worker()" function, some lines where added to limit the number of retries
+// that the client should perform to reconnect with the server.
+
+
 package client
 
 import (
 	"fmt"
+	"os"
 	"io"
 	"io/ioutil"
 	"runtime"
@@ -403,16 +409,22 @@ func (ctl *Control) worker() {
 				}
 
 				// loop util reconnecting to server success
+				var numRetriesLeft int = 3
 				for {
-					ctl.Info("try to reconnect to server...")
+					ctl.Info("try to reconnect to server... (%d retries left)", numRetriesLeft)
 					err = ctl.login()
 					if err != nil {
+					        if numRetriesLeft == 0 {
+					            os.Exit(1)
+					        }
+
 						ctl.Warn("reconnect to server error: %v", err)
 						time.Sleep(delayTime)
 						delayTime = delayTime * 2
 						if delayTime > maxDelayTime {
 							delayTime = maxDelayTime
 						}
+						numRetriesLeft = numRetriesLeft - 1
 						continue
 					}
 					// reconnect success, init delayTime
