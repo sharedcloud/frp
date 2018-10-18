@@ -1,3 +1,6 @@
+# Modifications copyright (C) 2018 Sharedcloud
+# Details: Remove default exposed ports
+
 FROM golang:1.10
 
 COPY . /go/src/github.com/fatedier/frp
@@ -11,7 +14,5 @@ RUN cd /go/src/github.com/fatedier/frp \
  && make clean
 
 WORKDIR /
-
-EXPOSE 80 443 6000 7000 7500
 
 ENTRYPOINT ["/frps"]
