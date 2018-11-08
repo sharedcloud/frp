@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Modifications copyright (C) 2018 Sharedcloud
+// Details: The text in the "Not Found" page has been changed.
+
 package vhost
 
 import (
@@ -36,11 +39,11 @@ const (
 </style>
 </head>
 <body>
-<h1>The page you visit not found.</h1>
+<h1>Oops! Something went wrong...</h1>
 <p>Sorry, the page you are looking for is currently unavailable.<br/>
 Please try again later.</p>
-<p>The server is powered by <a href="https://github.com/fatedier/frp">frp</a>.</p>
-<p><em>Faithfully yours, frp.</em></p>
+<p>If the problem persists, please report the error to us.</p>
+<p><em>The Sharedcloud Team</em></p>
 </body>
 </html>
 `
